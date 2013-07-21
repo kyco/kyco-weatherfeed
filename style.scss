@@ -8,7 +8,7 @@ $spinnerSpeed: 1.8s;
 
 // Add @font-face
 @mixin face ($fontName, $fontFileName) {
-    @font-face { 
+    @font-face {
         font-family: $fontName;
         src: url('#{$fontFileName}.eot');
         src: url('#{$fontFileName}.eot?#iefix') format('embedded-opentype'),
@@ -56,16 +56,14 @@ $HelveticaNeueLTCom-Cn: "HelveticaNeueLTCom-Cn", Arial, Helvetica, sans-serif;
 
         div {
             float: left;
-            height: $feedHeight;
 
             &.country {
-                margin-left: $feedWidth * 0.06;
                 margin-top: $feedHeight / 3.8;
+                margin-left: $feedWidth * 0.06;
                 width: $feedWidth * 0.4;
                 font-size: $feedHeight / 6.3;
             }
             &.weather {
-                position: relative;
                 margin: ($feedHeight / 6) ($feedWidth * 0.05);
                 width: $feedWidth * 0.2;
                 height: $feedWidth * 0.2;
@@ -75,7 +73,6 @@ $HelveticaNeueLTCom-Cn: "HelveticaNeueLTCom-Cn", Arial, Helvetica, sans-serif;
                 width: $feedWidth * 0.15;
                 line-height: $feedHeight;
             }
-
         }
 
         strong {
@@ -111,13 +108,11 @@ $lapDuration: $spinnerSpeed;
             opacity: 0;
             border-radius:5px;
             box-shadow: 0 0 2px $feedSecondaryTextColour;
-
             transform: scale(0.7);
-
             animation-name: spin;
             animation-duration: $lapDuration;
             animation-iteration-count: infinite;
-            animation-timing-function: cubic-bezier(0.5, 0.5, 0, 0.5); 
+            animation-timing-function: cubic-bezier(0.5, 0.5, 0, 0.5);
         }
     }
 }

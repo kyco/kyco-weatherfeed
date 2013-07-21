@@ -5,7 +5,7 @@ loadWeatherFeed();
 function loadWeatherFeed() {
     // RSS Weather feed using http://developer.yahoo.com/weather/
     // To find WOEID use http://woeid.rosselliot.co.nz/lookup/
-    // Weather feed url example: http://weather.yahooapis.com/forecastrss?w=1586550&u=c
+    // Weather feed url example: http://weather.yahooapis.com/forecastrss?w=1591691&u=c
     // Params: w = WOEID & u = temp unit (f = farenheit or c = celsius)
     // Below I have added a custom timestamp variable to the url so that on each function
     // call we don't return cached results which could be very inaccurate.
@@ -21,8 +21,9 @@ function loadWeatherFeed() {
         }
 
         // Get City/Town (area) and country
-        weather.area = $.trim(weather.feed.title.split('-').pop().split(',')[0]);
-        weather.country = countryCodes[$.trim(weather.feed.title.split('-').pop().split(',').pop())];
+        var areaStr = weather.feed.title.split('-').pop().split(',');
+        weather.area = $.trim(areaStr[0]);
+        weather.country = countryCodes[$.trim(areaStr[1])];
 
         // Create a DOM element so we can scan feed raw response and grab certain elements from it
         $('#kyco_weatherfeed').after('<div class="weather-api-response" style="display:none;">' + weather.raw + '</div>');
@@ -53,6 +54,7 @@ function loadWeatherFeed() {
 
         // Update temperature in HTML
         $('#kyco_weatherfeed #kyco_loader').fadeOut(1250, function() {
+            $(this).remove(); // Remove loader from DOM just becasue we can
             $('#kyco_weather').animate({'right':'0'}, 350);
             $('#kyco_weather').html('<div class="country"><strong>' + weather.area + '</strong><br />' + weather.country + '</div><div class="weather" title="' + weather.wd + '"></div><div class="temp"><strong>' + weather.temp + '°C</strong></div>');
             $('#kyco_weather .weather').css({
