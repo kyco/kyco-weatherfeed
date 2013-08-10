@@ -32,6 +32,7 @@ $HelveticaNeueLTCom-Cn: "HelveticaNeueLTCom-Cn", Arial, Helvetica, sans-serif;
     background: $feedBgColour;
     font-family: $HelveticaNeueLTCom-Cn;
     color: $feedSecondaryTextColour;
+    cursor: default;
     overflow: hidden;
 
     .loader {

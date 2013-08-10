@@ -56,11 +56,12 @@ function loadWeatherFeed() {
         $('#kyco_weatherfeed #kyco_loader').fadeOut(1250, function() {
             $(this).remove(); // Remove loader from DOM just becasue we can
             $('#kyco_weather').animate({'right':'0'}, 350);
-            $('#kyco_weather').html('<div class="country"><strong>' + weather.area + '</strong><br />' + weather.country + '</div><div class="weather" title="' + weather.wd + '"></div><div class="temp"><strong>' + weather.temp + '°C</strong></div>');
+            $('#kyco_weather').html('<div class="country"><strong>' + weather.area + '</strong><br />' + weather.country + '</div><div class="weather"></div><div class="temp"><strong>' + weather.temp + '°C</strong></div>');
             $('#kyco_weather .weather').css({
                 'background': weather.icon,
                 'background-size': 'cover'
             });
+            $('#kyco_weather').attr('title', weather.area + ' ' + weather.temp + '°C, ' + weather.wd);
         });
 
         $('.weather-api-response').remove(); // Remove DOM element because it is of no more use to us
