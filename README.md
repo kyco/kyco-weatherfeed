@@ -11,7 +11,7 @@ Download the zip or clone the repo. You will primarily have to change the WOEID 
 to the city/area you want the feed to pull weather for.
 
 To find your city's WOEID use this url:
-    http://woeid.rosselliot.co.nz/lookup/
+	http://woeid.rosselliot.co.nz/lookup/
 
 Once you have the WOEID change the *location* variable in *core.js* to your city's WOEID.
 

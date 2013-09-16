@@ -3,80 +3,80 @@
 loadWeatherFeed();
 
 function loadWeatherFeed() {
-    // RSS Weather feed using http://developer.yahoo.com/weather/
-    // To find WOEID use http://woeid.rosselliot.co.nz/lookup/
-    // Weather feed url example: http://weather.yahooapis.com/forecastrss?w=1591691&u=c
-    // Params: w = WOEID & u = temp unit (f = farenheit or c = celsius)
-    // Below I have added a custom timestamp variable to the url so that on each function
-    // call we don't return cached results which could be very inaccurate.
-    var location = '1591691';
-    var timestamp = new Date().getTime(); // returns number of milliseconds since the epoch
-    var weatehrApiUrl = 'http://weather.yahooapis.com/forecastrss?w=' + location + '&u=c&ts=' + timestamp;
+	// RSS Weather feed using http://developer.yahoo.com/weather/
+	// To find WOEID use http://woeid.rosselliot.co.nz/lookup/
+	// Weather feed url example: http://weather.yahooapis.com/forecastrss?w=1591691&u=c
+	// Params: w = WOEID & u = temp unit (f = farenheit or c = celsius)
+	// Below I have added a custom timestamp variable to the url so that on each function
+	// call we don't return cached results which could be very inaccurate.
+	var location = '1591691';
+	var timestamp = new Date().getTime(); // returns number of milliseconds since the epoch
+	var weatehrApiUrl = 'http://weather.yahooapis.com/forecastrss?w=' + location + '&u=c&ts=' + timestamp;
 
-    parseRSS(weatehrApiUrl, function(response) {
-        // Create a weather object for easy referencing
-        var weather = {
-            feed: response,
-            raw: response.entries[0].content
-        }
+	parseRSS(weatehrApiUrl, function(response) {
+		// Create a weather object for easy referencing
+		var weather = {
+			feed: response,
+			raw: response.entries[0].content
+		}
 
-        // Get City/Town (area) and country
-        var areaStr = weather.feed.title.split('-').pop().split(',');
-        weather.area = $.trim(areaStr[0]);
-        weather.country = countryCodes[$.trim(areaStr[1])];
+		// Get City/Town (area) and country
+		var areaStr = weather.feed.title.split('-').pop().split(',');
+		weather.area = $.trim(areaStr[0]);
+		weather.country = countryCodes[$.trim(areaStr[1])];
 
-        // Create a DOM element so we can scan feed raw response and grab certain elements from it
-        $('#kyco_weatherfeed').after('<div class="weather-api-response" style="display:none;">' + weather.raw + '</div>');
+		// Create a DOM element so we can scan feed raw response and grab certain elements from it
+		$('#kyco_weatherfeed').after('<div class="weather-api-response" style="display:none;">' + weather.raw + '</div>');
 
-        // Get only text nodes and filter out whitespace elements so we can get temp and current weather condition text
-        var weatherStr = $('.weather-api-response').contents().filter(function() {
-            if (this.nodeType == 3 && $.trim(this.data) != '') {
-                return true;
-            }
-        }).get(0).textContent; // Retrieve first text node
+		// Get only text nodes and filter out whitespace elements so we can get temp and current weather condition text
+		var weatherStr = $('.weather-api-response').contents().filter(function() {
+			if (this.nodeType == 3 && $.trim(this.data) != '') {
+				return true;
+			}
+		}).get(0).textContent; // Retrieve first text node
 
-        // Retrieving the text pieces we need:
-        weather.wd = $.trim(weatherStr.substr(0, weatherStr.indexOf(','))); // weather description
-        weather.temp = $.trim(weatherStr.substr(weatherStr.indexOf(',') + 1, weatherStr.length)); // weather temperature
-        weather.temp = weather.temp.substr(0, weather.temp.indexOf(' C'));
+		// Retrieving the text pieces we need:
+		weather.wd = $.trim(weatherStr.substr(0, weatherStr.indexOf(','))); // weather description
+		weather.temp = $.trim(weatherStr.substr(weatherStr.indexOf(',') + 1, weatherStr.length)); // weather temperature
+		weather.temp = weather.temp.substr(0, weather.temp.indexOf(' C'));
 
-        // Get weather condition code so we can show correct icon
-        weather.wc = $('.weather-api-response').contents().filter('img').attr('src').split('/').pop().split('.')[0]; // weather description code (an interger between 0 - 47, or 3200 for N/A)
+		// Get weather condition code so we can show correct icon
+		weather.wc = $('.weather-api-response').contents().filter('img').attr('src').split('/').pop().split('.')[0]; // weather description code (an interger between 0 - 47, or 3200 for N/A)
 
-        // Check if weather code is valid and load correct icon if it is
-        var testCode = parseInt(weather.wc);
-        if ((testCode >= 0 && testCode <= 47) || testCode === 3200) {
-            weather.icon = 'url(images/weather_icons/' + weather.wc + '.png) center top no-repeat';
-        } else {
-            // Load default weather not available icon (3200), see style.scss
-            weather.wd = 'Not available';
-        }
+		// Check if weather code is valid and load correct icon if it is
+		var testCode = parseInt(weather.wc);
+		if ((testCode >= 0 && testCode <= 47) || testCode === 3200) {
+			weather.icon = 'url(images/weather_icons/' + weather.wc + '.png) center top no-repeat';
+		} else {
+			// Load default weather not available icon (3200), see style.scss
+			weather.wd = 'Not available';
+		}
 
-        // Update temperature in HTML
-        $('#kyco_weatherfeed #kyco_loader').fadeOut(1250, function() {
-            $(this).remove(); // Remove loader from DOM just becasue we can
-            $('#kyco_weather').animate({'right':'0'}, 350);
-            $('#kyco_weather').html('<div class="country"><strong>' + weather.area + '</strong><br />' + weather.country + '</div><div class="weather"></div><div class="temp"><strong>' + weather.temp + '°C</strong></div>');
-            $('#kyco_weather .weather').css({
-                'background': weather.icon,
-                'background-size': 'cover'
-            });
-            $('#kyco_weather').attr('title', weather.area + ' ' + weather.temp + '°C, ' + weather.wd);
-        });
+		// Update temperature in HTML
+		$('#kyco_weatherfeed #kyco_loader').fadeOut(1250, function() {
+			$(this).remove(); // Remove loader from DOM just becasue we can
+			$('#kyco_weather').animate({'right':'0'}, 350);
+			$('#kyco_weather').html('<div class="country"><strong>' + weather.area + '</strong><br />' + weather.country + '</div><div class="weather"></div><div class="temp"><strong>' + weather.temp + '°C</strong></div>');
+			$('#kyco_weather .weather').css({
+				'background': weather.icon,
+				'background-size': 'cover'
+			});
+			$('#kyco_weather').attr('title', weather.area + ' ' + weather.temp + '°C, ' + weather.wd);
+		});
 
-        $('.weather-api-response').remove(); // Remove DOM element because it is of no more use to us
-    });
+		$('.weather-api-response').remove(); // Remove DOM element because it is of no more use to us
+	});
 
-    // Function to retrieve RSS feed using a handy Google API
-    function parseRSS(url, callback) {
-        $.ajax({
-            url: 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(url),
-            dataType: 'json',
-            success: function(response) {
-                callback(response.responseData.feed);
-            }
-        });
-    }
+	// Function to retrieve RSS feed using a handy Google API
+	function parseRSS(url, callback) {
+		$.ajax({
+			url: 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(url),
+			dataType: 'json',
+			success: function(response) {
+				callback(response.responseData.feed);
+			}
+		});
+	}
 }
 
 // The yahoo response will give us the city name and a two-letter country code. Here we

@@ -8,16 +8,16 @@ $spinnerSpeed: 1.8s;
 
 // Add @font-face
 @mixin face ($fontName, $fontFileName) {
-    @font-face {
-        font-family: $fontName;
-        src: url('#{$fontFileName}.eot');
-        src: url('#{$fontFileName}.eot?#iefix') format('embedded-opentype'),
-             url('#{$fontFileName}.woff') format('woff'),
-             url('#{$fontFileName}.ttf') format('truetype'),
-             url('#{$fontFileName}.svg##{$fontName}') format('svg');
-        font-weight: normal;
-        font-style: normal;
-    }
+	@font-face {
+		font-family: $fontName;
+		src: url('#{$fontFileName}.eot');
+		src: url('#{$fontFileName}.eot?#iefix') format('embedded-opentype'),
+			 url('#{$fontFileName}.woff') format('woff'),
+			 url('#{$fontFileName}.ttf') format('truetype'),
+			 url('#{$fontFileName}.svg##{$fontName}') format('svg');
+		font-weight: normal;
+		font-style: normal;
+	}
 }
 
 // Fonts
@@ -26,61 +26,61 @@ $HelveticaNeueLTCom-Cn: "HelveticaNeueLTCom-Cn", Arial, Helvetica, sans-serif;
 
 // Styles
 #kyco_weatherfeed {
-    position: relative;
-    width: $feedWidth;
-    height: $feedHeight;
-    background: $feedBgColour;
-    font-family: $HelveticaNeueLTCom-Cn;
-    color: $feedSecondaryTextColour;
-    cursor: default;
-    overflow: hidden;
+	position: relative;
+	width: $feedWidth;
+	height: $feedHeight;
+	background: $feedBgColour;
+	font-family: $HelveticaNeueLTCom-Cn;
+	color: $feedSecondaryTextColour;
+	cursor: default;
+	overflow: hidden;
 
-    .loader {
-        position: absolute;
-        top: $feedHeight * 0.1;
-        left: 0;
-        width: $feedWidth;
-        height: $feedHeight * 0.8;
-        font-size: ($feedHeight * 0.8) / 4;
-        line-height: $feedHeight * 0.8;
-        letter-spacing: 1px;
-        text-align: center;
-        overflow: hidden;
-    }
+	.loader {
+		position: absolute;
+		top: $feedHeight * 0.1;
+		left: 0;
+		width: $feedWidth;
+		height: $feedHeight * 0.8;
+		font-size: ($feedHeight * 0.8) / 4;
+		line-height: $feedHeight * 0.8;
+		letter-spacing: 1px;
+		text-align: center;
+		overflow: hidden;
+	}
 
-    #kyco_weather {
-        position: absolute;
-        right: -$feedWidth;
-        width: $feedWidth;
-        height: $feedHeight;
-        overflow: hidden;
+	#kyco_weather {
+		position: absolute;
+		right: -$feedWidth;
+		width: $feedWidth;
+		height: $feedHeight;
+		overflow: hidden;
 
-        div {
-            float: left;
+		div {
+			float: left;
 
-            &.country {
-                margin-top: $feedHeight / 3.8;
-                margin-left: $feedWidth * 0.06;
-                width: $feedWidth * 0.4;
-                font-size: $feedHeight / 6.3;
-            }
-            &.weather {
-                margin: ($feedHeight / 6) ($feedWidth * 0.05);
-                width: $feedWidth * 0.2;
-                height: $feedWidth * 0.2;
-            }
-            &.temp {
-                margin-left: $feedWidth * 0.04;
-                width: $feedWidth * 0.15;
-                line-height: $feedHeight;
-            }
-        }
+			&.country {
+				margin-top: $feedHeight / 3.8;
+				margin-left: $feedWidth * 0.06;
+				width: $feedWidth * 0.4;
+				font-size: $feedHeight / 6.3;
+			}
+			&.weather {
+				margin: ($feedHeight / 6) ($feedWidth * 0.05);
+				width: $feedWidth * 0.2;
+				height: $feedWidth * 0.2;
+			}
+			&.temp {
+				margin-left: $feedWidth * 0.04;
+				width: $feedWidth * 0.15;
+				line-height: $feedHeight;
+			}
+		}
 
-        strong {
-            color: $feedPrimaryTextColour;
-            font-size: $feedHeight / 5;
-        }
-    }
+		strong {
+			color: $feedPrimaryTextColour;
+			font-size: $feedHeight / 5;
+		}
+	}
 }
 
 // CSS Loader
@@ -90,54 +90,54 @@ $radius: $feedWidth / 5;
 $lapDuration: $spinnerSpeed;
 
 .spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    perspective: 200px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	perspective: 200px;
 
-    i.particle {
-        display: block;
-        position: absolute;
-        left: -$particleSize / 2;
-        top: -$particleSize / 2;
+	i.particle {
+		display: block;
+		position: absolute;
+		left: -$particleSize / 2;
+		top: -$particleSize / 2;
 
-        b {
-            display: block;
-            width: $particleSize;
-            height: $particleSize;
-            border: 1px solid $feedSecondaryTextColour;
-            opacity: 0;
-            border-radius:5px;
-            box-shadow: 0 0 2px $feedSecondaryTextColour;
-            transform: scale(0.7);
-            animation-name: spin;
-            animation-duration: $lapDuration;
-            animation-iteration-count: infinite;
-            animation-timing-function: cubic-bezier(0.5, 0.5, 0, 0.5);
-        }
-    }
+		b {
+			display: block;
+			width: $particleSize;
+			height: $particleSize;
+			border: 1px solid $feedSecondaryTextColour;
+			opacity: 0;
+			border-radius:5px;
+			box-shadow: 0 0 2px $feedSecondaryTextColour;
+			transform: scale(0.7);
+			animation-name: spin;
+			animation-duration: $lapDuration;
+			animation-iteration-count: infinite;
+			animation-timing-function: cubic-bezier(0.5, 0.5, 0, 0.5);
+		}
+	}
 }
 
 @for $i from 1 through $particles {
-    i:nth-child(#{$i}) {
-        $angle: $i / $particles * 360;
-        transform: rotate(#{$angle}deg) translate3d(#{$radius}, 0, 0);
+	i:nth-child(#{$i}) {
+		$angle: $i / $particles * 360;
+		transform: rotate(#{$angle}deg) translate3d(#{$radius}, 0, 0);
 
-        b {
-            animation-delay: $i * ($lapDuration / $particles);
-        }
-    }
+		b {
+			animation-delay: $i * ($lapDuration / $particles);
+		}
+	}
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    40% {
-        transform: rotate(-180deg) translateX(-$particleSize / 2);
-        opacity: 1;
-    }
-    100% {
-        transform: rotate(-180deg) scale(0.7);
-    }
+	0% {
+		transform: rotate(0deg);
+	}
+	40% {
+		transform: rotate(-180deg) translateX(-$particleSize / 2);
+		opacity: 1;
+	}
+	100% {
+		transform: rotate(-180deg) scale(0.7);
+	}
 }
