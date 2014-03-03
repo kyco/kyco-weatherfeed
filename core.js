@@ -1,4 +1,4 @@
-// kyco-weatherfeed brought to you by www.kyco.co.za. Copyright 2013 Cornelius Weidmann. Distributed under the GPL.
+// kyco-weatherfeed brought to you by www.kycosoftware.com. Copyright 2013 Cornelius Weidmann. Distributed under the GPL.
 
 loadWeatherFeed();
 
