@@ -35,4 +35,5 @@ Demo page. Improved installation and setup for easy use.
 Support
 -------
 
-For bugs or improvements please email [info@kycosoftware.com](mailto:info@kycosoftware.com).
+For bugs or improvements please use the [issues tab](https://github.com/kyco/kyco-weatherfeed/issues)
+or email [support@kycosoftware.com](mailto:support@kycosoftware.com).
