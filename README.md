@@ -1,5 +1,5 @@
-kyco-weatherfeed
-================
+kyco Weather Feed
+=================
 
 A lightweight weather widget which hooks into developer.yahoo.com/weather and uses WOEID.
 
@@ -24,12 +24,6 @@ This weather feed was built with SASS and custom weather icons.
 - You can fully customise the weather icons, just replace the icons in the *weather_icons*
 directory with your own.
 - The loader is purely CSS and currently only works in Firefox.
-
-
-What's to come
---------------
-
-Demo page. Improved installation and setup for easy use.
 
 
 Support
