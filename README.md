@@ -9,18 +9,16 @@ How to install
 
     Download or clone the repo
 
-Change the WOEID in `core.js` to the city/area you want the to pull weather for.
+Change the `location` variable in `core.js` to your city's WOEID.
 
 To find your city's WOEID use: http://woeid.rosselliot.co.nz/lookup/
-
-Once you have the WOEID change the `location` variable in `core.js` to your city's WOEID.
 
 
 Configuration
 -------------
 
 This weather feed was built with SASS and custom weather icons.
-- If you wish to change the styling you will have to install ruby and SASS first.
+- If you wish to change the styling you will have to install Ruby and SASS first.
 - You can fully customise the weather icons, just replace the icons in the `images/weather_icons` directory with your own.
 
 
