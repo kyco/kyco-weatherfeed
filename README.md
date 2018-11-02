@@ -9,7 +9,7 @@ How to install
 
     Download or clone the repo
 
-You will primarily have to change the WOEID in the `core.js` file to the city/area you want the feed to pull weather for.
+Change the WOEID in `core.js` to the city/area you want the to pull weather for.
 
 To find your city's WOEID use: http://woeid.rosselliot.co.nz/lookup/
 
