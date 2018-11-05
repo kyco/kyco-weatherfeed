@@ -3,6 +3,7 @@ kyco Weather Feed
 
 A lightweight weather widget which hooks into [developer.yahoo.com/weather](https://developer.yahoo.com/weather/) and uses [WOEID](http://www.woeidlookup.com/).
 
+*NOTE: The APIs in use no longer exist. This is a dinosaur :(*
 
 How to install
 --------------
